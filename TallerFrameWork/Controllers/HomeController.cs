@@ -29,7 +29,7 @@ namespace TallerFrameWork.Controllers
 
         public ActionResult Biografia()
         {
-            return View();
+            return View(); 
         }
     }
 }
