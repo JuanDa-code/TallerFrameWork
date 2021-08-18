@@ -7,30 +7,46 @@ using TallerFrameWork.Models;
 
 namespace TallerFrameWork.Controllers
 {
-    public class ProductoController : Controller
+    public class UsuarioRolController : Controller
     {
-        // GET: Producto
+        // GET: UsuarioRol
         public ActionResult Index()
         {
             using (var bd = new inventario2021Entities())
             {
-                return View(bd.producto.ToList());
+                return View(bd.usuariorol.ToList());
             }
         }
 
-        public static String NombreProveedor(int idProveedor)
+        public static String NombreUsuario (int idUsuario)
         {
             using (var bd = new inventario2021Entities())
             {
-                return bd.proveedor.Find(idProveedor).nombre;
+                return bd.usuario.Find(idUsuario).nombre;
             }
         }
 
-        public ActionResult ListarProveedores()
+        public static String DescripcionRol (int idRol)
         {
             using (var bd = new inventario2021Entities())
             {
-                return PartialView(bd.proveedor.ToList());
+                return bd.roles.Find(idRol).descripcion;
+            }
+        }
+
+        public ActionResult ListarUsuarios()
+        {
+            using (var bd = new inventario2021Entities())
+            {
+                return PartialView(bd.usuario.ToList());
+            }
+        }
+
+        public ActionResult ListarRoles()
+        {
+            using (var bd = new inventario2021Entities())
+            {
+                return PartialView(bd.roles.ToList());
             }
         }
 
@@ -42,7 +58,7 @@ namespace TallerFrameWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(producto producto)
+        public ActionResult Create(usuariorol usuariorol)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -51,11 +67,12 @@ namespace TallerFrameWork.Controllers
             {
                 using (var bd = new inventario2021Entities())
                 {
-                    bd.producto.Add(producto);
+                    bd.usuariorol.Add(usuariorol);
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -66,18 +83,18 @@ namespace TallerFrameWork.Controllers
         {
             using ( var bd = new inventario2021Entities())
             {
-                return View(bd.producto.Find(id));
+                return View(bd.usuariorol.Find(id));
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit (int id)
         {
             try
             {
                 using (var bd = new inventario2021Entities())
                 {
-                    producto findProducto = bd.producto.Where(a => a.id == id).FirstOrDefault();
-                    return View(findProducto);
+                    usuariorol findUsuarioRol = bd.usuariorol.Where(a => a.id == id).FirstOrDefault();
+                    return View(findUsuarioRol);
                 }
             }
             catch (Exception ex)
@@ -90,24 +107,21 @@ namespace TallerFrameWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit(producto editProducto)
+        public ActionResult Edit (usuariorol editUsuarioRol)
         {
             try
             {
-                using (var bd = new inventario2021Entities())
+                using ( var bd = new inventario2021Entities())
                 {
-                    producto producto = bd.producto.Find(editProducto.id);
+                    usuariorol usuariorol = bd.usuariorol.Find(editUsuarioRol.id);
 
-                    producto.nombre = editProducto.nombre;
-                    producto.cantidad = editProducto.cantidad;
-                    producto.descripcion = editProducto.descripcion;
-                    producto.percio_unitario = editProducto.percio_unitario;
-                    producto.id_proveedor = editProducto.id_proveedor;
+                    usuariorol.idUsuario = editUsuarioRol.idUsuario;
+                    usuariorol.idRol = editUsuarioRol.idRol;
 
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }
+            } 
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
@@ -121,8 +135,8 @@ namespace TallerFrameWork.Controllers
             {
                 using (var bd = new inventario2021Entities())
                 {
-                    producto producto = bd.producto.Find(id);
-                    bd.producto.Remove(producto);
+                    usuariorol usuariorol = bd.usuariorol.Find(id);
+                    bd.usuariorol.Remove(usuariorol);
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }

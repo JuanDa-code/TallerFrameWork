@@ -1,18 +1,21 @@
-﻿@model IEnumerable<TallerFrameWork.Models.roles>
+﻿@model IEnumerable<TallerFrameWork.Models.usuariorol>
 
 @{
-    ViewBag.Title = "Lista - Roles";
+    ViewBag.Title = "Lista - Usuario Rol";
 }
 
-<h2>Roles</h2>
+<h2>Lista Usuario Rol</h2>
 
 <p>
-    @Html.ActionLink("Registrar Rol", "Create")
+    @Html.ActionLink("Registrar", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            Descripción
+            Usuario
+        </th>
+        <th>
+            Rol
         </th>
         <th></th>
     </tr>
@@ -21,12 +24,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.descripcion)
+                @TallerFrameWork.Controllers.UsuarioRolController.NombreUsuario(item.idUsuario)
+            </td>
+            <td>
+                @TallerFrameWork.Controllers.UsuarioRolController.DescripcionRol(item.idRol)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { @class = "linkDelete" })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { @class = "linkDelete"})
             </td>
         </tr>
     }

@@ -1,4 +1,4 @@
-﻿@model TallerFrameWork.Models.cliente
+﻿@model TallerFrameWork.Models.usuariorol
 
 @{
     ViewBag.Title = "Detalles";
@@ -7,31 +7,23 @@
 <h2>Detalles</h2>
 
 <div>
-    <h4>Cliente</h4>
+    <h4>Usuario Rol</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Nombre
+            Usuario
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.nombre)
+            @TallerFrameWork.Controllers.UsuarioRolController.NombreUsuario(Model.idUsuario)
         </dd>
 
         <dt>
-            Documento
+            Rol
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.documento)
-        </dd>
-
-        <dt>
-            Email
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
+            @TallerFrameWork.Controllers.UsuarioRolController.DescripcionRol(Model.idRol)
         </dd>
 
     </dl>

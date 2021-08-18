@@ -134,6 +134,7 @@
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioRolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,16 +243,13 @@
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Proveedor\Create.cshtml" />
     <Content Include="Views\Proveedor\Details.cshtml" />
-    <Content Include="Views\Proveedor\Delete.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
-    <Content Include="Views\Cliente\Delete.cshtml" />
     <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Rol\Create.cshtml" />
-    <Content Include="Views\Rol\Delete.cshtml" />
     <Content Include="Views\Rol\Details.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
@@ -259,6 +257,12 @@
     <Content Include="Views\Producto\ListarProveedores.cshtml" />
     <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
+    <Content Include="Views\UsuarioRol\ListarUsuarios.cshtml" />
+    <Content Include="Views\UsuarioRol\ListarRoles.cshtml" />
+    <Content Include="Views\UsuarioRol\Create.cshtml" />
+    <Content Include="Views\UsuarioRol\Index.cshtml" />
+    <Content Include="Views\UsuarioRol\Details.cshtml" />
+    <Content Include="Views\UsuarioRol\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
