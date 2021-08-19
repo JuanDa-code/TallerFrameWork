@@ -1,0 +1,42 @@
+﻿@model TallerFrameWork.Models.producto_compra
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Producto Compra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Compra
+        </dt>
+
+        <dd>
+            @TallerFrameWork.Controllers.Producto_CompraController.FechaCompra(Model.id_compra)
+        </dd>
+
+        <dt>
+            Producto
+        </dt>
+
+        <dd>
+            @TallerFrameWork.Controllers.Producto_CompraController.NombreProducto(Model.id_producto)
+        </dd>
+
+        <dt>
+            Cantidad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Ver todos", "Index")
+</p>
