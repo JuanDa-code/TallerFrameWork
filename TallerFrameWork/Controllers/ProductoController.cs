@@ -133,5 +133,29 @@ namespace TallerFrameWork.Controllers
                 return View();
             }
         }
+
+        public ActionResult Reporte ()
+        {
+            try
+            {
+                var bd = new inventario2021Entities();
+                var query = from tabProveedor in bd.proveedor
+                            join tabProducto in bd.producto on tabProveedor.id equals tabProducto.id_proveedor
+                            select new Reporte
+                            {
+                                nombreProveedor = tabProveedor.nombre,
+                                telefonoProveedor = tabProveedor.telefono,
+                                direccionProveedor = tabProveedor.direccion,
+                                nombreProducto = tabProducto.nombre,
+                                precioProducto = tabProducto.percio_unitario
+                            };
+                return View(query);
+            } 
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Error " + ex);
+                return View();
+            }
+        }
     }
 }
