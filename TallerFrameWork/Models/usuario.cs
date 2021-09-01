@@ -11,6 +11,7 @@ namespace TallerFrameWork.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class usuario
     {
@@ -22,10 +23,22 @@ namespace TallerFrameWork.Models
         }
     
         public int id { get; set; }
+
+        [Required(ErrorMessage = "El campo es obligatorio")]
+        [StringLength(10, ErrorMessage = "Máximo 10 Carácteres")]
         public string nombre { get; set; }
+
+        [Required(ErrorMessage = "El campo es obligatorio")]
         public string apellido { get; set; }
+
+        [Required(ErrorMessage = "El campo es obligatorio")]
+        [DataType(DataType.Date)]
         public System.DateTime fecha_nacimiento { get; set; }
+
+        [Required(ErrorMessage = "El campo es obligatorio")]
         public string email { get; set; }
+
+        [Required(ErrorMessage = "El campo es obligatorio")]
         public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

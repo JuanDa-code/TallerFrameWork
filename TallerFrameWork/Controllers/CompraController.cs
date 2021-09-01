@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TallerFrameWork.Models;
+using Rotativa;
 
 namespace TallerFrameWork.Controllers
 {
@@ -148,6 +149,34 @@ namespace TallerFrameWork.Controllers
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
             }
+        }
+
+        public ActionResult ReporteCompra()
+        {
+            try
+            {
+                var bd = new inventario2021Entities();
+                var query = from tabCliente in bd.cliente
+                            join tabCompra in bd.compra on tabCliente.id equals tabCompra.id_cliente
+                            select new ReporteCompra
+                            {
+                                nombreCliente = tabCliente.nombre,
+                                documentoCliente = tabCliente.documento,
+                                emailCliente = tabCliente.email,
+                                fechaCompra = tabCompra.fecha,
+                                totalCompra = tabCompra.total
+                            };
+                return View(query);
+            } catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Error " + ex);
+                return View();
+            }
+        }
+
+        public ActionResult PdfReporte()
+        {
+            return new ActionAsPdf("ReporteCompra") { FileName = "Reporte.pdf" };
         }
     }
 }

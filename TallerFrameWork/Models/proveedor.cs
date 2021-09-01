@@ -11,6 +11,7 @@ namespace TallerFrameWork.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class proveedor
     {
@@ -21,9 +22,13 @@ namespace TallerFrameWork.Models
         }
     
         public int id { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio")]
         public string nombre { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio")]
         public string direccion { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio")]
         public string telefono { get; set; }
+        [Required(ErrorMessage = "El campo es obligatorio")]
         public string nombre_contacto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

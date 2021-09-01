@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TallerFrameWork.Models;
+using Rotativa;
 
 namespace TallerFrameWork.Controllers
 {
@@ -156,6 +157,11 @@ namespace TallerFrameWork.Controllers
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
             }
+        }
+
+        public ActionResult PdfReporte()
+        {
+            return new ActionAsPdf("Reporte") { FileName = "Reporte.pdf" };
         }
     }
 }
