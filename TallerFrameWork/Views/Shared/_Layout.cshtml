@@ -26,14 +26,14 @@
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     @if (User.Identity.IsAuthenticated == false)
                     {
-                    <li>@Html.ActionLink("Iniciar Sesión", "Login", "Usuario")</li>
+                        <li>@Html.ActionLink("Iniciar Sesión", "Login", "Usuario")</li>
                     }
 
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Opciones
+                                Crud's
                                 <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -57,6 +57,16 @@
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Producto y Proveedor", "Reporte", "Producto")</li>
                                 <li>@Html.ActionLink("Compra Cliente", "ReporteCompra", "Compra")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                CSV's
+                                <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("CSV Usuario", "uploadCSV", "Usuario")</li>
+                                <li>@Html.ActionLink("CSV Proveedor", "uploadCSV", "Proveedor")</li>
                             </ul>
                         </li>
                         <li>@Html.ActionLink("Cerrar sesión", "CloseSession", "Usuario")</li>
