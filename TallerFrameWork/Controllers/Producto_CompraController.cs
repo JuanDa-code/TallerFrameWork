@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TallerFrameWork.Models;
 
@@ -18,7 +16,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public static String NombreProducto (int idProducto)
+        public static String NombreProducto(int idProducto)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -71,14 +69,15 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
             }
         }
 
-        public ActionResult Details (int id)
+        public ActionResult Details(int id)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -86,7 +85,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult Edit (int id)
+        public ActionResult Edit(int id)
         {
             try
             {
@@ -95,7 +94,8 @@ namespace TallerFrameWork.Controllers
                     producto_compra findProductoCompra = bd.producto_compra.Where(a => a.id == id).FirstOrDefault();
                     return View(findProductoCompra);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -105,7 +105,7 @@ namespace TallerFrameWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit (producto_compra editProductoCompra)
+        public ActionResult Edit(producto_compra editProductoCompra)
         {
             try
             {
@@ -120,7 +120,8 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -138,7 +139,8 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();

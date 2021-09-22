@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Inventario</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/custom.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -69,6 +70,17 @@
                                 <li>@Html.ActionLink("CSV Proveedor", "uploadCSV", "Proveedor")</li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Paginadores
+                                <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Usuario", "PaginadorIndex", "Usuario")</li>
+                                <li>@Html.ActionLink("Producto", "PaginadorIndex", "Producto")</li>
+                            </ul>
+                        </li>
                         <li>@Html.ActionLink("Cerrar sesión", "CloseSession", "Usuario")</li>
                     }
                 </ul>
@@ -85,6 +97,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/custom.css")
     @RenderSection("scripts", required: false)
 </body>
 </html>

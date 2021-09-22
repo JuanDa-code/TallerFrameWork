@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TallerFrameWork.Models;
 
@@ -39,7 +37,8 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -66,7 +65,8 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -82,7 +82,8 @@ namespace TallerFrameWork.Controllers
                     cliente findCliente = bd.cliente.Where(a => a.id == id).FirstOrDefault();
                     return View(findCliente);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -107,7 +108,8 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();

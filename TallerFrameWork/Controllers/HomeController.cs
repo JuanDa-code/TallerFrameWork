@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
-using TallerFrameWork.Models;
+﻿using System.Web.Mvc;
 
 namespace TallerFrameWork.Controllers
 {
@@ -31,7 +25,7 @@ namespace TallerFrameWork.Controllers
 
         public ActionResult Biografia()
         {
-            return View(); 
+            return View();
         }
     }
 }

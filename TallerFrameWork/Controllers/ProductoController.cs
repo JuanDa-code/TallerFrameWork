@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Rotativa;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using TallerFrameWork.Models;
-using Rotativa;
 
 namespace TallerFrameWork.Controllers
 {
@@ -56,16 +55,17 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
             }
         }
 
-        public ActionResult Details (int id)
+        public ActionResult Details(int id)
         {
-            using ( var bd = new inventario2021Entities())
+            using (var bd = new inventario2021Entities())
             {
                 return View(bd.producto.Find(id));
             }
@@ -135,7 +135,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult Reporte ()
+        public ActionResult Reporte()
         {
             try
             {
@@ -151,7 +151,7 @@ namespace TallerFrameWork.Controllers
                                 precioProducto = tabProducto.percio_unitario
                             };
                 return View(query);
-            } 
+            }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
@@ -162,6 +162,35 @@ namespace TallerFrameWork.Controllers
         public ActionResult PdfReporte()
         {
             return new ActionAsPdf("Reporte") { FileName = "Reporte.pdf" };
+        }
+
+        public ActionResult PaginadorIndex(int pagina = 1)
+        {
+            try
+            {
+                var cantidadRegistros = 5;
+
+                using (var db = new inventario2021Entities())
+                {
+                    var productos = db.producto.OrderBy(x => x.id).Skip((pagina - 1) * cantidadRegistros).Take(cantidadRegistros).ToList();
+
+                    var totalRegistros = db.producto.Count();
+                    var modelo = new ProductoIndex();
+                    modelo.Productos = productos;
+                    modelo.ActualPage = pagina;
+                    modelo.Total = totalRegistros;
+                    modelo.RecordsPage = cantidadRegistros;
+                    modelo.valueQueryString = new RouteValueDictionary();
+
+                    return View(modelo);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "error " + ex);
+                return View();
+            }
         }
     }
 }

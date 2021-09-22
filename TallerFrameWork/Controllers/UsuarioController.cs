@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using TallerFrameWork.Models;
+using System.Web.Routing;
 using System.Web.Security;
-using System.Text;
+using TallerFrameWork.Models;
 
 namespace TallerFrameWork.Controllers
 {
@@ -59,7 +59,7 @@ namespace TallerFrameWork.Controllers
             var hash = sha1.ComputeHash(inputBytes);
 
             var sb = new StringBuilder();
-            for ( var i = 0; i < hash.Length; i++)
+            for (var i = 0; i < hash.Length; i++)
             {
                 sb.Append(hash[i].ToString("X2"));
             }
@@ -180,20 +180,20 @@ namespace TallerFrameWork.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult uploadCSV ()
+        public ActionResult uploadCSV()
         {
             return View();
         }
 
         [HttpPost]
 
-        public ActionResult uploadCSV (HttpPostedFileBase fileForm)
+        public ActionResult uploadCSV(HttpPostedFileBase fileForm)
         {
             try
             {
                 string filePath = string.Empty;
 
-                if(fileForm != null)
+                if (fileForm != null)
                 {
                     string path = Server.MapPath("~/Uploads/");
 
@@ -237,6 +237,35 @@ namespace TallerFrameWork.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
+                return View();
+            }
+        }
+
+        public ActionResult PaginadorIndex(int pagina = 1)
+        {
+            try
+            {
+                var cantidadRegistros = 5;
+
+                using (var db = new inventario2021Entities())
+                {
+                    var usuarios = db.usuario.OrderBy(x => x.id).Skip((pagina - 1) * cantidadRegistros).Take(cantidadRegistros).ToList();
+
+                    var totalRegistros = db.usuario.Count();
+                    var modelo = new UsuarioIndex();
+                    modelo.Usuarios = usuarios;
+                    modelo.ActualPage = pagina;
+                    modelo.Total = totalRegistros;
+                    modelo.RecordsPage = cantidadRegistros;
+                    modelo.valueQueryString = new RouteValueDictionary();
+
+                    return View(modelo);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "error " + ex);
                 return View();
             }
         }

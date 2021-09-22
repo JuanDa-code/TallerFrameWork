@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -40,7 +39,8 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -67,7 +67,8 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -83,7 +84,8 @@ namespace TallerFrameWork.Controllers
                     proveedor findProveedor = bd.proveedor.Where(a => a.id == id).FirstOrDefault();
                     return View(findProveedor);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -108,31 +110,32 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
             }
         }
 
-        public ActionResult uploadCSV ()
+        public ActionResult uploadCSV()
         {
             return View();
         }
 
         [HttpPost]
 
-        public ActionResult uploadCSV (HttpPostedFileBase fileForm)
+        public ActionResult uploadCSV(HttpPostedFileBase fileForm)
         {
             try
             {
                 string filePath = string.Empty;
 
-                if(fileForm != null)
+                if (fileForm != null)
                 {
                     string path = Server.MapPath("~/Uploads/");
 
-                    if(!Directory.Exists(path)) 
+                    if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
                     }
@@ -145,9 +148,9 @@ namespace TallerFrameWork.Controllers
 
                     string csvData = System.IO.File.ReadAllText(filePath);
 
-                    foreach(string row in csvData.Split('\n'))
+                    foreach (string row in csvData.Split('\n'))
                     {
-                        if(!string.IsNullOrEmpty(row))
+                        if (!string.IsNullOrEmpty(row))
                         {
                             var newProveedor = new proveedor
                             {
@@ -167,7 +170,7 @@ namespace TallerFrameWork.Controllers
                 }
 
                 return RedirectToAction("Index");
-            } 
+            }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);

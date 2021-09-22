@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,7 +18,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public static String NombreProducto (int idProducto)
+        public static String NombreProducto(int idProducto)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -55,14 +55,15 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
             }
         }
 
-        public ActionResult Details (int id)
+        public ActionResult Details(int id)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -70,7 +71,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult Edit (int id)
+        public ActionResult Edit(int id)
         {
             try
             {
@@ -79,7 +80,8 @@ namespace TallerFrameWork.Controllers
                     producto_imagen findProductoImagen = bd.producto_imagen.Where(a => a.id == id).FirstOrDefault();
                     return View(findProductoImagen);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();
@@ -89,7 +91,7 @@ namespace TallerFrameWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit (producto_imagen editProductoImagen)
+        public ActionResult Edit(producto_imagen editProductoImagen)
         {
             try
             {
@@ -111,7 +113,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult Delete (int id)
+        public ActionResult Delete(int id)
         {
             try
             {
@@ -122,7 +124,59 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Error " + ex);
+                return View();
+            }
+        }
+
+        public ActionResult CargarImagen ()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult CargarImagen (int producto, HttpPostedFileBase imagen)
+        {
+            try
+            {
+                string filePath = string.Empty;
+                string nameFile = "";
+
+                if (imagen != null)
+                {
+                    string path = Server.MapPath("~/Uploads/Imagenes/");
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    nameFile = Path.GetFileName(imagen.FileName);
+
+                    filePath = path + Path.GetFileName(imagen.FileName);
+
+                    string extension = Path.GetExtension(imagen.FileName);
+
+                    imagen.SaveAs(filePath);
+                }
+
+                using (var bd = new inventario2021Entities())
+                {
+                    var imagenProducto = new producto_imagen();
+                    imagenProducto.id_producto = producto;
+                    imagenProducto.imagen = "/Uploads/Imagenes/" + nameFile;
+                    bd.producto_imagen.Add(imagenProducto);
+                    bd.SaveChanges();
+                }
+
+                return View();
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TallerFrameWork.Models;
 
@@ -18,7 +16,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public static String NombreUsuario (int idUsuario)
+        public static String NombreUsuario(int idUsuario)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -26,7 +24,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public static String DescripcionRol (int idRol)
+        public static String DescripcionRol(int idRol)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -79,15 +77,15 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult Details (int id)
+        public ActionResult Details(int id)
         {
-            using ( var bd = new inventario2021Entities())
+            using (var bd = new inventario2021Entities())
             {
                 return View(bd.usuariorol.Find(id));
             }
         }
 
-        public ActionResult Edit (int id)
+        public ActionResult Edit(int id)
         {
             try
             {
@@ -107,11 +105,11 @@ namespace TallerFrameWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit (usuariorol editUsuarioRol)
+        public ActionResult Edit(usuariorol editUsuarioRol)
         {
             try
             {
-                using ( var bd = new inventario2021Entities())
+                using (var bd = new inventario2021Entities())
                 {
                     usuariorol usuariorol = bd.usuariorol.Find(editUsuarioRol.id);
 
@@ -121,7 +119,7 @@ namespace TallerFrameWork.Controllers
                     bd.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);

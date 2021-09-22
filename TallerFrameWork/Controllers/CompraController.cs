@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Rotativa;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TallerFrameWork.Models;
-using Rotativa;
 
 namespace TallerFrameWork.Controllers
 {
@@ -19,7 +17,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public static String NombreUsuario (int idUsuario)
+        public static String NombreUsuario(int idUsuario)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -27,7 +25,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public static String NombreCliente (int idCliente)
+        public static String NombreCliente(int idCliente)
         {
             using (var bd = new inventario2021Entities())
             {
@@ -35,7 +33,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult ListarUsuarios ()
+        public ActionResult ListarUsuarios()
         {
             using (var bd = new inventario2021Entities())
             {
@@ -43,7 +41,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult ListarClientes ()
+        public ActionResult ListarClientes()
         {
             using (var bd = new inventario2021Entities())
             {
@@ -80,9 +78,9 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult Details (int id)
+        public ActionResult Details(int id)
         {
-            using ( var bd = new inventario2021Entities())
+            using (var bd = new inventario2021Entities())
             {
                 return View(bd.compra.Find(id));
             }
@@ -132,7 +130,7 @@ namespace TallerFrameWork.Controllers
             }
         }
 
-        public ActionResult Delete (int id)
+        public ActionResult Delete(int id)
         {
             try
             {
@@ -167,7 +165,8 @@ namespace TallerFrameWork.Controllers
                                 totalCompra = tabCompra.total
                             };
                 return View(query);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error " + ex);
                 return View();

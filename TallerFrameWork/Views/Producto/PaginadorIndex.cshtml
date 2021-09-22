@@ -1,0 +1,29 @@
+﻿@model TallerFrameWork.Models.ProductoIndex
+
+@{
+    ViewBag.Title = "PaginadorIndex";
+}
+
+<h2>Paginador Index</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Descripción</th>
+        <th>Precio Unitario</th>
+        <th>Proveedor</th>
+    </tr>
+    @foreach (var producto in Model.Productos)
+     {
+        <tr>
+            <td>@producto.nombre</td>
+            <td>@producto.cantidad</td>
+            <td>@producto.descripcion</td>
+            <td>@producto.percio_unitario</td>
+            <td>@TallerFrameWork.Controllers.ProductoController.NombreProveedor(producto.id_proveedor)</td>
+        </tr>
+     }
+</table>
+
+@{ Html.RenderPartial("Paginador", Model); }
