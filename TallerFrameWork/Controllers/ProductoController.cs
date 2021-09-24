@@ -1,6 +1,8 @@
 ﻿using Rotativa;
 using System;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using TallerFrameWork.Models;
@@ -67,7 +69,10 @@ namespace TallerFrameWork.Controllers
         {
             using (var bd = new inventario2021Entities())
             {
-                return View(bd.producto.Find(id));
+                var producto = bd.producto.Find(id);
+                var imagen = bd.producto_imagen.Where(e => e.id_producto == producto.id).FirstOrDefault();
+                ViewBag.imagen = imagen.imagen;
+                return View(producto);
             }
         }
 
@@ -191,6 +196,50 @@ namespace TallerFrameWork.Controllers
                 ModelState.AddModelError("", "error " + ex);
                 return View();
             }
+        }
+
+        public ActionResult cargarImagen()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult cargarImagen(int producto, HttpPostedFileBase fileForm)
+        {
+            string filePath = string.Empty;
+            string name = "";
+
+            if (fileForm != null)
+            {
+                string path = Server.MapPath("~/Uploads/Imagenes/");
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                name = Path.GetFileName(fileForm.FileName);
+
+                filePath = path + Path.GetFileName(fileForm.FileName);
+
+                string extension = Path.GetExtension(fileForm.FileName);
+
+                fileForm.SaveAs(filePath);
+            }
+
+
+            using (var db = new inventario2021Entities())
+            {
+                var imagenProducto = new producto_imagen();
+                imagenProducto.id_producto = producto;
+                imagenProducto.imagen = "/Uploads/Imagenes/" + name;
+                db.producto_imagen.Add(imagenProducto);
+                db.SaveChanges();
+            }
+
+            return View();
         }
     }
 }
