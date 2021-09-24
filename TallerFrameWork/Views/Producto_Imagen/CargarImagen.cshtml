@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TallerFrameWork.Models.producto>
+﻿@model IEnumerable<TallerFrameWork.Models.producto_imagen>
 
 <h2>Cargar Imagen Producto</h2>
 
@@ -6,9 +6,9 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <label class="control-label col-md-2">Producto</label>
+        <label class="control-label col-md-2" for="id_producto">Producto</label>
         <div class="col-md-10">
-            <input type="number" name="producto" class="form-control" />
+            @Html.Action("ListarProductos")
         </div>
     </div>
 
@@ -24,5 +24,4 @@
             <input type="submit" value="Enviar" class="form-control" />
         </div>
     </div>
-
 }
