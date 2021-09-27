@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Inventario</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/custom.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/personalizacion.css")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,8 +23,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     @if (User.Identity.IsAuthenticated == false)
                     {
                         <li>@Html.ActionLink("Iniciar Sesión", "Login", "Usuario")</li>
@@ -97,7 +95,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/custom.css")
     @RenderSection("scripts", required: false)
 </body>
 </html>
