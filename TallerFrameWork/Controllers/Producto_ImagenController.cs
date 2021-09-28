@@ -140,7 +140,7 @@ namespace TallerFrameWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult CargarImagen (int producto, HttpPostedFileBase imagen)
+        public ActionResult CargarImagen (int id_producto, HttpPostedFileBase imagen)
         {
             try
             {
@@ -168,7 +168,7 @@ namespace TallerFrameWork.Controllers
                 using (var bd = new inventario2021Entities())
                 {
                     var imagenProducto = new producto_imagen();
-                    imagenProducto.id_producto = producto;
+                    imagenProducto.id_producto = id_producto;
                     imagenProducto.imagen = "/Uploads/Imagenes/" + nameFile;
                     bd.producto_imagen.Add(imagenProducto);
                     bd.SaveChanges();
